@@ -1,0 +1,178 @@
+/* "*" é um elemento global que está estilizando todo conteúdo da página
+neste caso estou definindo a margem e o padding da pagina = 0px (Pixels)
+e a propriedade box-sizing: borde-box isto é o navegador vai respeitar as bordas
+das nossas caixas, fazendo que não influence nos tamanhos das caixas que eu defino*/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+/* Raiz do site*/
+::root {
+  font-size: 16px;
+}
+
+/* Costumizar a scroll bar*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #2c2c31;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9e9ea0;
+}
+/* Animação de entrada */
+@keyframes entering {
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  color: #eaeaea;
+  background-color: #121215;
+
+  font-family: "Roboto", sans-serif; /* Definindo o estilo da fonte */
+
+  display: grid; /* O tipo do display */
+  grid-template-areas: "profile timeline"; /* Definindo as areas */
+  grid-template-columns: 1fr 1fr; /* Para cada uma das colunas vai ter 1 Fração da pagina */
+  grid-template-rows: 100vh; /*View High Port ( Altura da região da tela )*/
+}
+
+nav {
+  padding: 64px; /* Espaçamento interno de 64px */
+  grid-area: timeline; /* Defini a nav como a parte da TIMELINE*/
+
+  overflow-y: scroll;
+  animation: entering 0.7s ease-in-out;
+}
+
+/* Elemento Pai */
+.memory {
+  display: flex; /* Deixa todo conteudo dentro da div com class memory flexivel*/
+  flex-direction: column; /* Defino que a direção fique como estilo de coluna um embaixo do outro*/
+  gap: 16px; /* Define o espaçamento dos elementos de 16px*/
+
+  text-decoration: none; /* Definindo o texto que ele não tenha nenhum tipo de decoração*/
+  margin-bottom: 64px; /* Espaçamento entre os conteúdos*/
+}
+
+/* Estou definindo que a classe memory apenas manipule a tag "small" dentro
+da classe memory*/
+.memory small {
+  color: #bebebf;
+  font-size: 0.75rem;
+}
+
+/* Estou definindo que a classe memory apenas manipule a tag "h1" dentro
+da classe memory*/
+.memory h1 {
+  font-size: 2rem;
+  color: #eaeaea;
+}
+
+/* Estou definindo que a classe memory apenas manipule a tag "img" dentro
+da classe memory*/
+.memory img {
+  width: 100%;
+  height: 280px;
+
+  object-fit: cover; /* A  propriedade object-fit: cover; sempre vai manter a proporção
+  de uma capa*/
+  border-radius: 8px; /* Arredondamento das bordas */
+
+  transition: transform 0.3s ease-in-out; /* transição suave*/
+}
+
+.memory div {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+
+  border-radius: 8px; /* Arredondamento das bordas */
+}
+
+.memory:hover img {
+  transform: scale(1.1);
+}
+
+/* Estou definindo que a classe memory apenas manipule a tag "p" dentro
+da classe memory*/
+.memory p {
+  font-size: 1.2rem;
+  color: #bebebf;
+  line-height: 28px; /* Espaçamento de uma linha para outra */
+}
+
+aside {
+  grid-area: profile; /* Defino a area profile do aside*/
+
+  display: flex; /* Pra dizer que os elementos dentro do aside a gente vai posicionar eles*/
+  flex-direction: column; /* Definindo a direção em coluna */
+  align-items: center; /* Para centralizar o conteudo na horizontal*/
+  justify-content: center; /* Para centralizar o conteudo na vertical*/
+  gap: 20px; /* Espaçamento dos items do aside*/
+
+  border-right: 1px solid;
+  border-image: linear-gradient(#727275, #2c2c31) 1;
+
+  background-image: url(./assets/background.svg); /* Importando o background */
+  background-position: top right; /* Definindo a posição da background*/
+  background-repeat: no-repeat; /* não se repetir*/
+  background-size: auto 100%; /* adpta na tela */
+}
+
+aside * {
+  animation: entering 0.7s ease-in-out;
+}
+/* Estou selecionando dentro de aside a segunda imagem (photo-profile) para aplicar a estilização*/
+aside img:nth-child(2) {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%; /* quando a borda é 50% da o efeito de arredondamento*/
+
+  border: 4px solid transparent;
+  background: linear-gradient(#d39333, #ed5636, #633bbc) padding-box,
+    linear-gradient(260deg, #d39333, #ed5636, #633bbc) border-box;
+}
+
+aside p {
+  font-size: 2rem;
+  text-align: center;
+}
+
+aside span {
+  font-size: 0.75rem;
+  color: #9e9ea0;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas:
+      "profile"
+      "timeline";
+  }
+
+  aside {
+    border-right: none;
+    padding: 32px 12px;
+  }
+
+  nav {
+    overflow-y: visible;
+    padding: 22px;
+  }
+}
